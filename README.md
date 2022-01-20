@@ -1,6 +1,6 @@
 # mobx_app_test
 
-A new Flutter project.
+Flutter app to learn MobX
 
 ## Getting Started
 
