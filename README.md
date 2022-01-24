@@ -1,4 +1,5 @@
-# mobx_app_test
+# mobx app
+
 
 Flutter app to learn MobX
 
