@@ -1,6 +1,6 @@
-import 'dart:developer';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
+import 'package:mobx_app_test/pages/cats/cats_page.dart';
 import 'package:mobx_app_test/store/counter.dart';
 
 void main() {
@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
@@ -35,12 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   CounterStore counterStore = CounterStore();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,10 +51,10 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Observer(
-              builder: (_) => Text(
-              '${counterStore.counter}',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+                builder: (_) => Text(
+                '${counterStore.counter}',
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),            
           ],
         ),
@@ -67,7 +63,30 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: counterStore.incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
-      ), 
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: 'Business',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'School',
+          ),
+        ],
+        currentIndex: 0,
+        selectedItemColor: Colors.amber[800],
+        onTap: (index)=>{_changePage()},
+      ),
     );
+  }
+
+  _changePage(){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => CatsPage()));
   }
 }

@@ -1,3 +1,5 @@
+import 'package:http/http.dart' as http;
+
 class CatsApiHelper{
   static const apiUrlBase = 'https://api.thecatapi.com/v1/images/search';
   late final Uri uri;
