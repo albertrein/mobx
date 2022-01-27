@@ -33,9 +33,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   CounterStore counterStore = CounterStore();
-
  
   @override
   Widget build(BuildContext context) {
@@ -67,8 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.cast_sharp),
+            label: 'Cats Page',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.business),
@@ -81,12 +79,16 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         currentIndex: 0,
         selectedItemColor: Colors.amber[800],
-        onTap: (index)=>{_changePage()},
+        onTap: (index)=>{_changePage(index)},
       ),
     );
   }
 
-  _changePage(){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => CatsPage()));
+  _changePage(int index){
+    switch(index){
+      case 0:
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CatsPage()));
+        break;
+    }    
   }
 }

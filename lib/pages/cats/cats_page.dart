@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import 'cats_store/cats_store_images.dart';
+
 class CatsPage extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => _CatsPageState();
@@ -8,8 +10,8 @@ class CatsPage extends StatefulWidget{
 }
 
 class _CatsPageState  extends State<CatsPage> {
-  String _catImageUrl = 'https://d.newsweek.com/en/full/1920025/cat-its-mouth-open.jpg?w=1600&h=1200&q=88&f=e4241cd2c228c6e075a0ac0d54c8ef39';
-
+  CatsStoreImages catsStoreImages = CatsStoreImages();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,14 +21,19 @@ class _CatsPageState  extends State<CatsPage> {
           children: [
             Observer(
               builder: (_) {
-                return Image.network(_catImageUrl);
+                return Image.network(catsStoreImages.urlImage);
               }
             ),
-            OutlinedButton(              
-              onPressed: (){
-                //carrega imagem
-              },
-              child: Text('Próxima imagem >'))
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: 
+                OutlinedButton(              
+                onPressed: (){
+                  catsStoreImages.getUrlImage();
+                },
+                child: const Text('Próxima imagem ...'),                
+              ),
+            )
           ]
         ),
       ),

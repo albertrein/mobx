@@ -1,18 +1,40 @@
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class CatsApiHelper{
+class CatsApiService{
   static const apiUrlBase = 'https://api.thecatapi.com/v1/images/search';
   late final Uri uri;
-  late final response;
   
-  Future<String> getUrlCatImage() async{
+
+  CatsApiService(){
     uri = Uri.parse(apiUrlBase);
-    response = await http.get(uri);
+  }
+  
+  Future<String> getUrlCatImage() async{    
+    http.Response response = await http.get(uri);
 
     if (response.statusCode == 200) {
-      return response.body;
+      Iterable dataConverted = convertStringBodyToIterable(response.body);
+      return getUrlFromIterable(dataConverted);
     } else {
-      return 'Image not found';
+      return '';
     }
   }
+
+  Iterable convertStringBodyToIterable(String responseBody){
+    return jsonDecode(responseBody);
+  }
+
+  String getUrlFromIterable(Iterable dataConverted){
+    try{
+      Map<String, dynamic> dataMap = dataConverted.first;
+      if(dataMap.containsKey('url')){
+        return dataMap['url'];
+      }
+      return '';
+    }catch(e){
+      return '';
+    }
+  }
+
 }
