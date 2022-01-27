@@ -21,7 +21,23 @@ class _CatsPageState  extends State<CatsPage> {
           children: [
             Observer(
               builder: (_) {
-                return Image.network(catsStoreImages.urlImage);
+                return Image.network(
+                  catsStoreImages.urlImage,
+                  loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
+                      );
+                    }
+                );
               }
             ),
             Padding(
