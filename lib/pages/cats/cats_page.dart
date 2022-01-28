@@ -11,6 +11,16 @@ class CatsPage extends StatefulWidget{
 
 class _CatsPageState  extends State<CatsPage> {
   CatsStoreImages catsStoreImages = CatsStoreImages();
+  late final AudioCache _audioCache;
+
+  @override
+  void initState() {
+    super.initState();
+    _audioCache = AudioCache(
+      prefix: 'pages/cats/',
+      fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
+    );
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -46,6 +56,7 @@ class _CatsPageState  extends State<CatsPage> {
                 OutlinedButton(              
                 onPressed: (){
                   catsStoreImages.getUrlImage();
+                  _audioCache.play('cat-meowing.mp3');
                 },
                 child: const Text('Próxima imagem ...'),                
               ),
