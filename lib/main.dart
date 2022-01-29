@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx_app_test/pages/cats/cats_page.dart';
@@ -84,11 +86,33 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  _changePage(int index){
+  _changePage(int index) async {
     switch(index){
       case 0:
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CatsPage()));
+        if(await _validateNetworkConnection() == true){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => CatsPage()));
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(_snackBarMessage('Sem acesso à internet'));
+        }
         break;
     }    
+  }
+
+  Future<bool> _validateNetworkConnection()async{
+    try{
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        return true;
+      }
+      return false;
+    }on SocketException catch (_){
+      return false;
+    }catch(e){
+      return false;
+    }
+  }
+
+  SnackBar _snackBarMessage(String messageOfSnack){
+    return SnackBar(content: Text(messageOfSnack));
   }
 }
