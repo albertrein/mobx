@@ -1,4 +1,4 @@
-import 'package:audioplayers/audioplayers.dart';
+//import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -12,15 +12,15 @@ class CatsPage extends StatefulWidget{
 
 class _CatsPageState  extends State<CatsPage> {
   CatsStoreImages catsStoreImages = CatsStoreImages();
-  late final AudioCache _audioCache;
+  //late final AudioCache _audioCache;
 
   @override
   void initState() {
     super.initState();
-    _audioCache = AudioCache(
+    /*_audioCache = AudioCache(
       prefix: 'pages/cats/',
       fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
-    );
+    );*/
   }
   
   @override
@@ -30,34 +30,38 @@ class _CatsPageState  extends State<CatsPage> {
         padding: const EdgeInsets.only(top:40, left: 20, right: 20, bottom: 50),
         child: Column(
           children: [
-            Observer(
-              builder: (_) {
-                return Image.network(
-                  catsStoreImages.urlImage,
-                  loadingBuilder: (BuildContext context, Widget child,
-                    ImageChunkEvent? loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
+            AnimatedSwitcher(
+              duration: Duration(seconds: 22),
+              child: 
+              Observer(
+                builder: (_) {
+                  return Image.network(
+                    catsStoreImages.urlImage,
+                    loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        }
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
                       }
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes!
-                              : null,
-                        ),
-                      );
-                    }
-                );
-              }
-            ),
+                  );
+                }
+              )
+            ),            
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: 
                 OutlinedButton(              
                 onPressed: (){
                   catsStoreImages.getUrlImage();
-                  _audioCache.play('cat-meowing.mp3');
+                  //_audioCache.play('cat-meowing.mp3');
                 },
                 child: const Text('Próxima imagem ...'),                
               ),
