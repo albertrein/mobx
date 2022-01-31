@@ -1,4 +1,4 @@
-//import 'package:audioplayers/audioplayers.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -12,15 +12,15 @@ class CatsPage extends StatefulWidget{
 
 class _CatsPageState  extends State<CatsPage> {
   CatsStoreImages catsStoreImages = CatsStoreImages();
-  //late final AudioCache _audioCache;
+  late final AudioCache _audioCache;
 
   @override
   void initState() {
     super.initState();
-    /*_audioCache = AudioCache(
-      prefix: 'pages/cats/',
+    _audioCache = AudioCache(
+      prefix: 'assets/pages/cats/',
       fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
-    );*/
+    );
   }
   
   @override
@@ -60,8 +60,8 @@ class _CatsPageState  extends State<CatsPage> {
               child: 
                 OutlinedButton(              
                 onPressed: (){
+                  _audioCache.play('cat-meowing.mp3');
                   catsStoreImages.getUrlImage();
-                  //_audioCache.play('cat-meowing.mp3');
                 },
                 child: const Text('Próxima imagem ...'),                
               ),
