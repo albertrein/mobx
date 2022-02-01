@@ -70,14 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.cast_sharp),
             label: 'Cats Page',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-          ),
         ],
         currentIndex: 0,
         selectedItemColor: Colors.amber[800],
