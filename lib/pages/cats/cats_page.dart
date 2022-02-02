@@ -32,28 +32,29 @@ class _CatsPageState  extends State<CatsPage> {
           children: [
             AnimatedSwitcher(
               duration: Duration(seconds: 22),
-              child: 
-              Observer(
-                builder: (_) {
-                  return Image.network(
-                    catsStoreImages.urlImage,
-                    loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) {
-                          return child;
+              child: Expanded(
+                child: Observer(
+                  builder: (_) {
+                    return Image.network(
+                      catsStoreImages.urlImage,
+                      loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
                         }
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                : null,
-                          ),
-                        );
-                      }
-                  );
-                }
-              )
+                    );
+                  }
+                ),
+              )              
             ),            
             Padding(
               padding: const EdgeInsets.only(top: 20),
