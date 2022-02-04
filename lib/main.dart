@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
+import 'package:mobx_app_test/pages/beauty_chat/beauty_chat_page.dart';
 import 'package:mobx_app_test/pages/cats/cats_page.dart';
 import 'package:mobx_app_test/store/counter.dart';
 
@@ -70,6 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.cast_sharp),
             label: 'Cats Page',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.cast_sharp),
+            label: 'Beauty Chat',
+          ),
         ],
         currentIndex: 0,
         selectedItemColor: Colors.amber[800],
@@ -86,6 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
         }else{
           ScaffoldMessenger.of(context).showSnackBar(_snackBarMessage('Sem acesso à internet'));
         }
+        break;
+      case 1:
+        Navigator.push(context, MaterialPageRoute(builder: (context) => BeautyChat()));
         break;
     }    
   }
