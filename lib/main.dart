@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx_app_test/pages/beauty_chat/beauty_chat_page.dart';
 import 'package:mobx_app_test/pages/cats/cats_page.dart';
+import 'package:mobx_app_test/pages/form_listview/form_listview_page.dart';
 import 'package:mobx_app_test/store/counter.dart';
 
 void main() {
@@ -75,6 +76,10 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.cast_sharp),
             label: 'Beauty Chat',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.forum),
+            label: 'Form & ListView',
+          ),
         ],
         currentIndex: 0,
         selectedItemColor: Colors.amber[800],
@@ -94,6 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 1:
         Navigator.push(context, MaterialPageRoute(builder: (context) => BeautyChat()));
+        break;
+      case 2:
+        Navigator.push(context, MaterialPageRoute(builder: (context) => FormListViewPage()));
         break;
     }    
   }
