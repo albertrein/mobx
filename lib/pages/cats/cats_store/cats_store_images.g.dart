@@ -27,7 +27,7 @@ mixin _$CatsStoreImages on _CatsStoreImages, Store {
   final _$getUrlImageAsyncAction = AsyncAction('_CatsStoreImages.getUrlImage');
 
   @override
-  Future getUrlImage() {
+  Future<void> getUrlImage() {
     return _$getUrlImageAsyncAction.run(() => super.getUrlImage());
   }
 
