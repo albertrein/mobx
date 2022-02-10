@@ -19,17 +19,22 @@ class _FormListViewState extends State<FormListViewPage>{
       appBar: AppBar(title: const Text('Obervable List with Form'),),
       body:  Column(
           children: [
-            const Text('Testing Form inserting in List:'),
-            SizedBox(
-              child: FormListResgister(listStoreData: listStore)
+            Card(
+              margin: EdgeInsets.all(20),
+              color: Color.fromARGB(193, 255, 255, 255),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  
+                  const Text('Testing Form inserting in List:'),
+                  FormListResgister(listStoreData: listStore)
+                ],
+              )
             ),
             //SizedBox(child: Flexible(child: formRegister()),),
 
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: ListViewWidget(listStoreData: listStore),
-                //child: listViewWidgetLocal(context),
-            ),
+            ListViewWidget(listStoreData: listStore),
+            //child: listViewWidgetLocal(context),            
           ],
         ),
       );
