@@ -2,5 +2,7 @@
 
 Flutter app to learn MobX
 
-## Getting Started
+## Getting started of project.
+You need run the follow code:
+
 
